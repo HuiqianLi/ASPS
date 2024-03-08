@@ -1,0 +1,6 @@
+python train.py --exp_name '0308_E_L' --polyp_dir "polyp_seg/TrainDataset/"
+python infer.py --exp_name '0308_E_L' --dataset_name 'CVC-300'  --test_seg_dir "polyp_seg/TestDataset/CVC-300/"   
+python infer.py --exp_name '0308_E_L' --dataset_name 'CVC-ClinicDB'  --test_seg_dir "polyp_seg/TestDataset/CVC-ClinicDB/"   
+python infer.py --exp_name '0308_E_L' --dataset_name 'CVC-ColonDB'  --test_seg_dir "polyp_seg/TestDataset/CVC-ColonDB/"   
+python infer.py --exp_name '0308_E_L' --dataset_name 'ETIS-LaribPolypDB'  --test_seg_dir "polyp_seg/TestDataset/ETIS-LaribPolypDB/"   
+python infer.py --exp_name '0308_E_L' --dataset_name 'Kvasir'  --test_seg_dir "polyp_seg/TestDataset/Kvasir/"   
