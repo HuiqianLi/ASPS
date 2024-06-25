@@ -7,14 +7,7 @@ import torchvision.transforms as transforms
 from .mask_decoder import MaskDecoder
 from .CNN_encoder import Mscan_Encoder
 
-def compute_entropy(feature):
-    B, C, H, W = feature.size()
-    reshaped_feature = feature.view(B, C, -1)
-    # Compute the probability distribution for each channel
-    prob_dist = F.softmax(reshaped_feature, dim=2)
-    entropy = torch.sum(-prob_dist * torch.log2(prob_dist + 1e-10), dim=2)
-    return entropy
-  
+
 class Network(nn.Module):
     def __init__(self, args):
         super(Network, self).__init__()
