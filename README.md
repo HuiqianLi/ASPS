@@ -1,5 +1,11 @@
 # ASPS: Augmented Segment Anything Model for Polyp Segmentation
 
+### News
+
+2024/6/25: 🎉Our method was accepted by **MICCAI 2024**.
+
+2024/5/21: Add data loader for Skin Lesion Segmentation (ISIC2017).
+
 ### Installation
 
 Install the dependencies of [SAM](https://github.com/facebookresearch/segment-anything).
@@ -10,6 +16,8 @@ Install mmcv for CNN encoder.
 
 We conduct extensive experiments on five polyp segmentation datasets
 following [PraNet](https://github.com/DengPingFan/PraNet). 
+
+>  For skin lesion segmentation: following [EGE-UNet](https://github.com/JCruan519/EGE-UNet), needing to modify `from dataset.Segmentation_other` to `from dataset.Segmentation_isic` both in `train.py` and `infer.py`.
 
 ### Training & Infering
 
