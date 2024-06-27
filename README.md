@@ -6,7 +6,7 @@
 
 2024/5/21: Add data loader for Skin Lesion Segmentation (ISIC2017).
 
-![](figs\Framework.png)
+![](figs/Framework.png)
 
 ### Requirements
 
