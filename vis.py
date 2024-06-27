@@ -21,7 +21,7 @@ def save_mask(pred, file):
     return
 
 if __name__ == '__main__':
-    checkpoint_file = "/data/lhq/code/SAM/SAM_0229_Ablation/v4_EFA_PGA/exp_dir/0302_B_L/chekpoints/0015200.pth"
+    checkpoint_file = "chekpoints/0015200.pth"
     image_path = "exp_dir/10.jpg"
     raw_img = cv2.imread(image_path)
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     #     pred_new[i] = confidence[i] * pred[i] + (1 - confidence[i]) * gt[i]
 
     # # polyp_pred = pred_new >= 0.5
-    # polyp_pred = masks >= 0.5
-    # img_name = image_path.split('/')[-1]
-    # polyp_file = os.path.join('exp_dir/', img_name.split('.')[0]+'.png')
-    # save_mask(polyp_pred[0], polyp_file)
+    polyp_pred = masks >= 0.5
+    img_name = image_path.split('/')[-1]
+    polyp_file = os.path.join('exp_dir/', img_name.split('.')[0]+'.png')
+    save_mask(polyp_pred[0], polyp_file)
