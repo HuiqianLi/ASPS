@@ -66,7 +66,7 @@ To inference single image or visualize the results, run `vis.py`.
 
 |     raw image      |     pred mask      |         GT         |
 | :----------------: | :----------------: | :----------------: |
-| ![10](figs\10.jpg) | ![10](figs\10.png) | ![gt](figs\gt.png) |
+| ![10](figs/10.jpg) | ![10](figs/10.png) | ![gt](figs/gt.png) |
 
 ### Checkpoints
 
