@@ -43,9 +43,9 @@ class Trainer():
         model = Network(args)
         model = model.cuda()
         if args.sam == "vit_b":
-            SAM_model = sam_model_registry["vit_b"](checkpoint="pretrained/sam_vit_b_01ec64.pth")
+            SAM_model = sam_model_registry["vit_b"](checkpoint=args.sam_path_b)
         elif args.sam == "vit_h":
-            SAM_model = sam_model_registry["vit_h"](checkpoint="pretrained/sam_vit_h_4b8939.pth")
+            SAM_model = sam_model_registry["vit_h"](checkpoint=args.sam_path_h)
         elif args.sam == "efficient_sam_vitt":
             SAM_model = build_efficient_sam_vitt()
         SAM_model = SAM_model.cuda()

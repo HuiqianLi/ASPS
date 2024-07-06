@@ -18,7 +18,7 @@ class Network(nn.Module):
         else:
             mscan_dim = 512
         self.mask_decoder = MaskDecoder(model_type=args.sam, transformer_dim=256, cnn_dim=mscan_dim)
-        self.cnn_image_size = 320
+        self.cnn_image_size = args.image_size_cnn
 
     def forward(
         self, batched_input, image_embeddings, interm_embeddings, multimask_output=False

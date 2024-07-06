@@ -18,6 +18,8 @@ parser.add_argument('--save_iter', default=400) # 5000
 parser.add_argument('--mscan_checkpoint', type=str, default='pretrained/mscan_l.pth')
 parser.add_argument('--mscan', type=str, default='large')
 parser.add_argument('--sam', type=str, default='efficient_sam_vitt', help='vit_b or vit_h or efficient_sam_vitt')
+parser.add_argument('--sam_path_b', type=str, default='pretrained/sam_vit_b_01ec64.pth', help='vit_b path')
+parser.add_argument('--sam_path_h', type=str, default='pretrained/sam_vit_h_4b8939.pth', help='vit_h path')
 
 # segmentation
 parser.add_argument('--RFB_aggregated_channel', type=int, nargs='*', default=[32, 64, 128])
@@ -28,6 +30,7 @@ parser.add_argument('--budget', type=float, default=0.3, metavar='N', help='the 
 parser.add_argument('--polyp_dir', default='data/sample')
 parser.add_argument('--dataset_name', default='CVC-300')
 parser.add_argument('--test_seg_dir', default='data/sample')
+parser.add_argument('--image_size_cnn', type=int, default=320, help='image size used during training')
 parser.add_argument('--image_size', type=int, default=1024, help='image size used during training')
 parser.add_argument('--ver', type=int, default=2, help='type of transform')
 parser.add_argument('--batch_size', type=int, default=4, help='batch size in each mini-batch') # 4
