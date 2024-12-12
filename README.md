@@ -1,4 +1,4 @@
-# ASPS: Augmented Segment Anything Model for Polyp Segmentation
+# [ASPS: Augmented Segment Anything Model for Polyp Segmentation](https://arxiv.org/abs/2407.00718)
 
 ### News
 
@@ -79,5 +79,11 @@ To inference single image or visualize the results, run `vis.py`.
 | EfficientSAM-ASPS | [EfficientSAM](https://github.com/yformer/EfficientSAM)      | https://rec.ustc.edu.cn/share/c9696fb0-344a-11ef-b24f-3f1e0faf0fb9 | xoqh     |
 
 ### Citation
-
-[TODO]
+```
+@article{li2024asps,
+  title={ASPS: Augmented Segment Anything Model for Polyp Segmentation},
+  author={Li, Huiqian and Zhang, Dingwen and Yao, Jieru and Han, Longfei and Li, Zhongyu and Han, Junwei},
+  journal={arXiv preprint arXiv:2407.00718},
+  year={2024}
+}
+```
