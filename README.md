@@ -2,6 +2,8 @@
 
 ### News
 
+2025/2/22: Add code for SAM2.
+
 2024/6/25: 🎉Our method was accepted by **MICCAI 2024**.
 
 2024/5/21: Add data loader for Skin Lesion Segmentation (ISIC2017).

@@ -11,6 +11,7 @@ warnings.filterwarnings("ignore")
 
 from option import args
 from efficient_sam.build_efficient_sam import build_efficient_sam_vitt, build_efficient_sam_vits
+from sam2.build_sam import build_sam2
 from segment_anything import sam_model_registry
 from dataset.Segmentation_other import DatasetSegmentation, sample_data
 from loss.segmentation import dice_loss
@@ -48,6 +49,14 @@ class Trainer():
             SAM_model = sam_model_registry["vit_h"](checkpoint=args.sam_path_h)
         elif args.sam == "efficient_sam_vitt":
             SAM_model = build_efficient_sam_vitt()
+        elif args.sam == "sam2_tiny":
+            SAM_model = build_sam2(checkpoint=args.sam2_path_t,config_file="configs/sam2.1/sam2.1_hiera_t.yaml")
+        elif args.sam == "sam2_small":
+            SAM_model = build_sam2(checkpoint=args.sam2_path_s,config_file="configs/sam2.1/sam2.1_hiera_s.yaml")
+        elif args.sam == "sam2_base":
+            SAM_model = build_sam2(checkpoint=args.sam2_path_b,config_file="configs/sam2.1/sam2.1_hiera_b+.yaml")
+        elif args.sam == "sam2_large":
+            SAM_model = build_sam2(checkpoint=args.sam2_path_l,config_file="configs/sam2.1/sam2.1_hiera_l.yaml")
         SAM_model = SAM_model.cuda()
         SAM_model.eval()
 
@@ -121,8 +130,8 @@ class Trainer():
             # print(f"Total number of parameters: {total_params}")
 
             args.iterations, args.save_iter = int(args.iterations), int(args.save_iter)
-            # if itr % args.save_iter == 0 or itr == args.iterations:
-            if itr >= args.save_iter*25 and (itr % args.save_iter == 0 or itr == args.iterations):
+            if itr % args.save_iter == 0 or itr == args.iterations:
+            # if itr >= args.save_iter*25 and (itr % args.save_iter == 0 or itr == args.iterations):
                 save_file = os.path.join(checkpoint_dir, f'{str(itr).zfill(7)}.pth')
                 checkpoint = {
                     'model_state_dict': model.state_dict(),

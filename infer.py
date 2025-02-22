@@ -16,6 +16,7 @@ from dataset.Segmentation_other import DatasetSegmentationInfer
 from model.Network import Network
 from segment_anything import sam_model_registry
 from efficient_sam.build_efficient_sam import build_efficient_sam_vitt, build_efficient_sam_vits
+from sam2.build_sam import build_sam2
 
 def compute_dice(seg, gt):
     intersection = torch.sum(seg * gt)
@@ -83,6 +84,15 @@ def test(checkpoint_file):
         SAM_model = sam_model_registry["vit_h"](checkpoint="pretrained/sam_vit_h_4b8939.pth")
     elif args.sam == "efficient_sam_vitt":
         SAM_model = build_efficient_sam_vitt()
+    elif args.sam == "sam2_tiny":
+        SAM_model = build_sam2(checkpoint=args.sam2_path_t,config_file="configs/sam2.1/sam2.1_hiera_t.yaml")
+    elif args.sam == "sam2_small":
+        SAM_model = build_sam2(checkpoint=args.sam2_path_s,config_file="configs/sam2.1/sam2.1_hiera_s.yaml")
+    elif args.sam == "sam2_base":
+        SAM_model = build_sam2(checkpoint=args.sam2_path_b,config_file="configs/sam2.1/sam2.1_hiera_b+.yaml")
+    elif args.sam == "sam2_large":
+        SAM_model = build_sam2(checkpoint=args.sam2_path_l,config_file="configs/sam2.1/sam2.1_hiera_l.yaml")
+        
     SAM_model.load_state_dict(checkpoint['sam_model_state_dict'], strict=False)
     SAM_model = SAM_model.cuda()
     SAM_model.eval()     

@@ -4,7 +4,7 @@ parser = argparse.ArgumentParser(description='MSACAN_SAM')
 
 # common
 parser.add_argument('--exp_name', default='sample')
-parser.add_argument('--iterations', type=int, default=400*40, help='the number of iterations for training')
+parser.add_argument('--iterations', type=int, default=400*100, help='the number of iterations for training')    # *40
 parser.add_argument('--seed', type=int, default=0, help='total seed')
 parser.add_argument('--lr', type=float, default=1e-5)   # 5e-5
 parser.add_argument('--weight_decay', type=float, default=1e-4) # 1e-4
@@ -17,9 +17,13 @@ parser.add_argument('--save_iter', default=400) # 5000
 # backbone
 parser.add_argument('--mscan_checkpoint', type=str, default='pretrained/mscan_l.pth')
 parser.add_argument('--mscan', type=str, default='large')
-parser.add_argument('--sam', type=str, default='efficient_sam_vitt', help='vit_b or vit_h or efficient_sam_vitt')
+parser.add_argument('--sam', type=str, default='sam2_small', help='vit_b or vit_h or efficient_sam_vitt or sam2_tiny or sam2_small or sam2_base or sam2_large')
 parser.add_argument('--sam_path_b', type=str, default='pretrained/sam_vit_b_01ec64.pth', help='vit_b path')
 parser.add_argument('--sam_path_h', type=str, default='pretrained/sam_vit_h_4b8939.pth', help='vit_h path')
+parser.add_argument('--sam2_path_t', type=str, default='pretrained/sam2.1_hiera_tiny.pt')
+parser.add_argument('--sam2_path_s', type=str, default='pretrained/sam2.1_hiera_small.pt')
+parser.add_argument('--sam2_path_b', type=str, default='pretrained/sam2.1_hiera_base_plus.pt')
+parser.add_argument('--sam2_path_l', type=str, default='pretrained/sam2.1_hiera_large.pt')
 
 # segmentation
 parser.add_argument('--RFB_aggregated_channel', type=int, nargs='*', default=[32, 64, 128])

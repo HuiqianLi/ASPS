@@ -89,8 +89,10 @@ class features_feat(nn.Module):
         vit_dim,
         transformer_dim=256,
         cnn_dim=256,
+        isSam2=False
     ) -> None:
         super().__init__()
+        self.isSam2 = isSam2
         self.embedding_encoder = nn.Sequential(
                                         nn.ConvTranspose2d(transformer_dim, transformer_dim // 4, kernel_size=2, stride=2),
                                         LayerNorm2d(transformer_dim // 4),
@@ -118,7 +120,11 @@ class features_feat(nn.Module):
         image_embeddings: torch.Tensor,
         interm_embeddings: torch.Tensor,
     ) -> Tuple[torch.Tensor, torch.Tensor]:   
-        vit_features = interm_embeddings[2].permute(0, 3, 1, 2) # early-layer ViT feature, after 1st global attention block in ViT   
+        if not self.isSam2:
+            vit_features = interm_embeddings[2].permute(0, 3, 1, 2) # early-layer ViT feature, after 1st global attention block in ViT   
+        else:
+            vit_features = interm_embeddings[2]
+        # print("vit_features", vit_features.shape)      # 2025/2/21 查看vit_dim_dict
         hq_features = self.embedding_encoder(image_embeddings) + self.compress_vit_feat(vit_features)
         cnn_features_feat = self.compress_cnn_feat(cnn_feature)
         cnn_features_feat = F.interpolate(cnn_features_feat, size=hq_features.shape[2:], mode='bilinear')
@@ -171,7 +177,8 @@ class MaskDecoder(nn.Module):
         # self.pe_layer = PositionEmbeddingRandom(embed_dim // 2)
         self.image_embedding_size = (1024 // 16, 1024 // 16)
 
-        vit_dim_dict = {"vit_b":768,"vit_l":1024,"vit_h":1280,'efficient_sam_vitt':192}
+        vit_dim_dict = {"vit_b":768,"vit_l":1024,"vit_h":1280,'efficient_sam_vitt':192,
+                        "sam2_tiny":256, "sam2_small":256, "sam2_base":256, "sam2_large":256}
         vit_dim = vit_dim_dict[model_type]
         # self.hf_mlp = MLP(transformer_dim, transformer_dim, transformer_dim // 8, 3)
         self.embedding_maskfeature = nn.Sequential(
@@ -180,7 +187,7 @@ class MaskDecoder(nn.Module):
                                         nn.GELU(),
                                         nn.Conv2d(transformer_dim // 4, transformer_dim // 8, 3, 1, 1))
         self.dense_prompt_tokens = nn.Parameter(torch.randn(1, 256, 64, 64))  # learnable token
-        self.feature_fusion = features_feat(vit_dim, cnn_dim=cnn_dim)
+        self.feature_fusion = features_feat(vit_dim, cnn_dim=cnn_dim, isSam2=("sam2" in model_type))
         self.cnn_modify = nn.Sequential(nn.Conv2d(cnn_dim, transformer_dim, 3, 1, 1),
                                         LayerNorm2d(transformer_dim),
                                         nn.GELU())
