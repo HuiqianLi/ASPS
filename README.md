@@ -80,6 +80,7 @@ Note: [Baidu](https://pan.baidu.com/s/1v61ml0k5yJFjQdlYT8CZTw?pwd=9myy)(9myy)
 | SAM-B-ASPS        |                                                              | https://rec.ustc.edu.cn/share/5e9be4b0-344a-11ef-a151-6b2a0b8eedb8 | li92     |
 | SAM-H-ASPS        |                                                              | https://rec.ustc.edu.cn/share/fc3da400-344a-11ef-b1d5-932017a40fd5 | 3w0g     |
 | EfficientSAM-ASPS | [EfficientSAM](https://github.com/yformer/EfficientSAM)      | https://rec.ustc.edu.cn/share/c9696fb0-344a-11ef-b24f-3f1e0faf0fb9 | xoqh     |
+| SAM2              | [SAM2](https://github.com/facebookresearch/sam2/)            |                                                              |          |
 
 ### Citation
 ```
