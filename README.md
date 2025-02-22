@@ -72,6 +72,7 @@ To inference single image or visualize the results, run `vis.py`.
 
 ### Checkpoints
 
+Note: [Baidu](https://pan.baidu.com/s/1v61ml0k5yJFjQdlYT8CZTw?pwd=9myy)(9myy)
 | Name              | Repo                                                         | Download                                                     | Password |
 | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
 | MSCAN-B           | [SegNeXt](https://github.com/visual-attention-network/segnext) | https://rec.ustc.edu.cn/share/4c1d2ab0-344e-11ef-b416-0bee023cca0f | 31tz     |
