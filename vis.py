@@ -40,24 +40,28 @@ if __name__ == '__main__':
     # gt = transforms.Resize((256, 256))(gt)
     # gt = transforms.ToTensor()(gt).unsqueeze(0).cuda()
 
-    if args.sam == "vit_b":
-        model_encoder = sam_model_registry["vit_b"](checkpoint="pretrained/sam_vit_b_01ec64.pth")
-    else:
-        model_encoder = sam_model_registry["vit_h"](checkpoint="pretrained/sam_vit_h_4b8939.pth")
-    model_encoder = model_encoder.cuda()
-    model_encoder.eval()
-    model = Network(args).cuda()
-    # import torch.nn as nn
-    # model = nn.DataParallel(model)  # multi-GPU
-    checkpoint = torch.load(checkpoint_file)
-    model_state = checkpoint['model_state_dict']
-    model.load_state_dict(model_state)
-    model_encoder.load_state_dict(checkpoint['sam_model_state_dict'], strict=False)
-    model.eval()
+    with torch.no_grad():
 
-    images = torch.stack([transforms.Resize(1024)(image) for image in input_batch])
-    image_embeddings, interm_embeddings = model_encoder.image_encoder(images)
-    masks, iou_preds, uncertainty_p = model(images, image_embeddings, interm_embeddings, multimask_output=False)
+        if args.sam == "vit_b":
+            model_encoder = sam_model_registry["vit_b"](checkpoint="pretrained/sam_vit_b_01ec64.pth")
+        elif args.sam == "vit_h":
+            model_encoder = sam_model_registry["vit_h"](checkpoint="pretrained/sam_vit_h_4b8939.pth")
+        elif args.sam == "sam2_large":
+            model_encoder = build_sam2(checkpoint=args.sam2_path_l,config_file="configs/sam2.1/sam2.1_hiera_l.yaml")
+        model_encoder = model_encoder.cuda()
+        model_encoder.eval()
+        model = Network(args).cuda()
+        # import torch.nn as nn
+        # model = nn.DataParallel(model)  # multi-GPU
+        checkpoint = torch.load(checkpoint_file)
+        model_state = checkpoint['model_state_dict']
+        model.load_state_dict(model_state)
+        model_encoder.load_state_dict(checkpoint['sam_model_state_dict'], strict=False)
+        model.eval()
+
+        images = torch.stack([transforms.Resize(1024)(image) for image in input_batch])
+        image_embeddings, interm_embeddings = model_encoder.image_encoder(images)
+        masks, iou_preds, uncertainty_p = model(images, image_embeddings, interm_embeddings, multimask_output=False)
 
 
     # # U_p + U_i
