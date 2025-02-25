@@ -84,10 +84,14 @@ Note: [Baidu](https://pan.baidu.com/s/1v61ml0k5yJFjQdlYT8CZTw?pwd=9myy)(9myy)
 
 ### Citation
 ```
-@article{li2024asps,
-  title={ASPS: Augmented Segment Anything Model for Polyp Segmentation},
-  author={Li, Huiqian and Zhang, Dingwen and Yao, Jieru and Han, Longfei and Li, Zhongyu and Han, Junwei},
-  journal={arXiv preprint arXiv:2407.00718},
-  year={2024}
+@InProceedings{Li_ASPS_MICCAI2024,
+        author = { Li, Huiqian and Zhang, Dingwen and Yao, Jieru and Han, Longfei and Li, Zhongyu and Han, Junwei},
+        title = { { ASPS: Augmented Segment Anything Model for Polyp Segmentation } },
+        booktitle = {proceedings of Medical Image Computing and Computer Assisted Intervention -- MICCAI 2024},
+        year = {2024},
+        publisher = {Springer Nature Switzerland},
+        volume = {LNCS 15009},
+        month = {October},
+        page = {118 -- 128}
 }
 ```
